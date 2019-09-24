@@ -1,0 +1,28 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:3e9126bb-cb31-466c-abdf-a89ef4d3d07f",
+      "resource": {
+        "resourceType": "Patient",
+        "identifier": [
+          {
+            "system": "urn:oid:TEST.MRN.OID",
+            "value": "1234568"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Smith",
+            "given": [
+              "John",
+              "J"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
