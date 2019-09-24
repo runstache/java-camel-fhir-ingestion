@@ -1,0 +1,53 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:3e9126bb-cb31-466c-abdf-a89ef4d3d07f",
+      "resource": {
+        "resourceType": "Patient",
+        "identifier": [
+          {
+            "system": "urn:oid:TEST.MRN.OID",
+            "value": "1234568"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Smith",
+            "given": [
+              "John",
+              "J"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:47fb4f91-ac07-417f-9590-c5571f69271b",
+      "resource": {
+        "resourceType": "Provenance",
+        "target": [
+          {
+            "reference": "urn:uuid:3e9126bb-cb31-466c-abdf-a89ef4d3d07f"
+          }
+
+        ],
+        "recorded": "2019-09-24T14:04:31.175+00:00",
+        "reason": [
+          {
+            "system": "http://hl7.org/fhir/v3/ActReason",
+            "code": "HSYSADMIN",
+            "display": "health system administration"
+          }
+        ],
+        "activity": {
+          "system": "http://hl7.org/fhir/w3c-provenance-activity-type",
+          "code": "Derivation",
+          "display": "wasDerivedFrom"
+        }
+      }
+    }
+  ]
+}

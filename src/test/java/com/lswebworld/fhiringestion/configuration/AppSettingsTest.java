@@ -28,6 +28,7 @@ public class AppSettingsTest {
     settings.setFhirServer("http://localhost/baseDstu3");
     settings.setFhirVersion("DSTU3");
     settings.setSourcePath("c:/docker/data/fhir");
+    settings.setIdentifierExist(true);
   }
 
   @Test
@@ -51,12 +52,18 @@ public class AppSettingsTest {
   }
 
   @Test
+  public void testIsIdentifierExist() {
+    assertTrue(settings.isIdentifierExist());
+  }
+
+  @Test
   public void testEquals() {
     AppSettings settings2 = new AppSettings();
     settings2.setEnabled(true);
     settings2.setFhirServer("http://localhost/baseDstu3");
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/fhir");
+    settings2.setIdentifierExist(true);
     assertTrue(settings.equals(settings2));
   }
 
@@ -67,6 +74,7 @@ public class AppSettingsTest {
     settings2.setFhirServer("http://localhost/baseDstu3");
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/fhir");
+    settings2.setIdentifierExist(true);
     assertFalse(settings.equals(settings2));
   }
 
@@ -77,6 +85,7 @@ public class AppSettingsTest {
     settings2.setFhirServer("http://localhost/baseDstu2");
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/fhir");
+    settings2.setIdentifierExist(true);
     assertFalse(settings.equals(settings2));
   }
 
@@ -87,6 +96,7 @@ public class AppSettingsTest {
     settings2.setFhirServer("http://localhost/baseDstu3");
     settings2.setFhirVersion("DSTU2");
     settings2.setSourcePath("c:/docker/data/fhir");
+    settings2.setIdentifierExist(true);
     assertFalse(settings.equals(settings2));
   }
 
@@ -97,8 +107,20 @@ public class AppSettingsTest {
     settings2.setFhirServer("http://localhost/baseDstu3");
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/ccd");
+    settings2.setIdentifierExist(true);
     assertFalse(settings.equals(settings2));
   }
+
+  @Test
+  public void testNotEqualsIdentifierExist() {
+    AppSettings settings2 = new AppSettings();
+    settings2.setEnabled(true);
+    settings2.setFhirServer("http://localhost/baseDstu3");
+    settings2.setFhirVersion("DSTU3");
+    settings2.setSourcePath("c:/docker/data/fhir");
+    settings2.setIdentifierExist(false);
+    assertFalse(settings.equals(settings2));
+  } 
 
   @Test
   public void testNotEqualsWrongObject() {

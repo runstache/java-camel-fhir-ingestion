@@ -11,6 +11,8 @@ public class AppSettings {
   private String fhirServer;
   private String sourcePath;
   private boolean enabled;
+  private boolean identifierExist;
+  
 
   /**
    * Constructor.
@@ -53,6 +55,14 @@ public class AppSettings {
     this.enabled = enabled;
   }
 
+  public boolean isIdentifierExist() {
+    return identifierExist;
+  }
+
+  public void setIdentifierExist(boolean identifierExist) {
+    this.identifierExist = identifierExist;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof AppSettings) {
@@ -60,10 +70,13 @@ public class AppSettings {
       return this.enabled == settings.isEnabled()
           && this.fhirServer.equals(settings.getFhirServer())
           && this.fhirVersion.equals(settings.getFhirVersion())
-          && this.sourcePath.equals(settings.getSourcePath());
+          && this.sourcePath.equals(settings.getSourcePath())
+          && this.identifierExist == settings.isIdentifierExist();
     }
     return false;
   }
+
+
 
 
 
