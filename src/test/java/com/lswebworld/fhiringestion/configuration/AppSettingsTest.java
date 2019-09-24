@@ -28,7 +28,9 @@ public class AppSettingsTest {
     settings.setFhirServer("http://localhost/baseDstu3");
     settings.setFhirVersion("DSTU3");
     settings.setSourcePath("c:/docker/data/fhir");
+    settings.setTimeout(60000);
     settings.setIdentifierExist(true);
+    settings.setFhirLogging(true);
   }
 
   @Test
@@ -57,6 +59,16 @@ public class AppSettingsTest {
   }
 
   @Test
+  public void testGetTimeout() {
+    assertEquals(60000, settings.getTimeout());
+  }
+
+  @Test
+  public void testIsFhirLogging() {
+    assertTrue(settings.isFhirLogging());
+  }
+
+  @Test
   public void testEquals() {
     AppSettings settings2 = new AppSettings();
     settings2.setEnabled(true);
@@ -64,6 +76,8 @@ public class AppSettingsTest {
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/fhir");
     settings2.setIdentifierExist(true);
+    settings2.setTimeout(60000);
+    settings2.setFhirLogging(true);
     assertTrue(settings.equals(settings2));
   }
 
@@ -75,6 +89,8 @@ public class AppSettingsTest {
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/fhir");
     settings2.setIdentifierExist(true);
+    settings2.setTimeout(60000);
+    settings2.setFhirLogging(true);
     assertFalse(settings.equals(settings2));
   }
 
@@ -86,6 +102,8 @@ public class AppSettingsTest {
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/fhir");
     settings2.setIdentifierExist(true);
+    settings2.setTimeout(60000);
+    settings2.setFhirLogging(true);
     assertFalse(settings.equals(settings2));
   }
 
@@ -97,6 +115,8 @@ public class AppSettingsTest {
     settings2.setFhirVersion("DSTU2");
     settings2.setSourcePath("c:/docker/data/fhir");
     settings2.setIdentifierExist(true);
+    settings2.setTimeout(60000);
+    settings2.setFhirLogging(true);
     assertFalse(settings.equals(settings2));
   }
 
@@ -108,6 +128,8 @@ public class AppSettingsTest {
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/ccd");
     settings2.setIdentifierExist(true);
+    settings2.setTimeout(60000);
+    settings2.setFhirLogging(true);
     assertFalse(settings.equals(settings2));
   }
 
@@ -119,8 +141,36 @@ public class AppSettingsTest {
     settings2.setFhirVersion("DSTU3");
     settings2.setSourcePath("c:/docker/data/fhir");
     settings2.setIdentifierExist(false);
+    settings2.setTimeout(60000);
+    settings2.setFhirLogging(true);
     assertFalse(settings.equals(settings2));
   } 
+
+  @Test
+  public void testNotEqualsTimeout() {
+    AppSettings settings2 = new AppSettings();
+    settings2.setEnabled(true);
+    settings2.setFhirServer("http://localhost/baseDstu3");
+    settings2.setFhirVersion("DSTU3");
+    settings2.setSourcePath("c:/docker/data/fhir");
+    settings2.setIdentifierExist(true);
+    settings2.setTimeout(30000);
+    settings2.setFhirLogging(true);
+    assertFalse(settings.equals(settings2));
+  }
+
+  @Test
+  public void testNotEqualsFhirLogging() {
+    AppSettings settings2 = new AppSettings();
+    settings2.setEnabled(true);
+    settings2.setFhirServer("http://localhost/baseDstu3");
+    settings2.setFhirVersion("DSTU3");
+    settings2.setSourcePath("c:/docker/data/fhir");
+    settings2.setIdentifierExist(true);
+    settings2.setTimeout(60000);
+    settings2.setFhirLogging(false);
+    assertFalse(settings.equals(settings2));
+  }
 
   @Test
   public void testNotEqualsWrongObject() {

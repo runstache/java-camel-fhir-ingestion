@@ -1,0 +1,16 @@
+FROM java:8
+
+EXPOSE 8089
+
+RUN \
+    mkdir /opt/apps && \
+    mkdir /opt/fhir
+
+RUN chmod 777 /opt/fhir
+
+WORKDIR /opt/apps
+
+COPY ./apps/*.* /opt/apps/
+
+#Add the Certs to the system
+CMD ["java", "-Djava.rmi.server.hostname=fhir-engine", "-Dcom.sun.management.jmxremote.local.only=false", "-Dcom.sun.management.jmxremote.port=8089", "-Dcom.sun.management.jmxremote.rmi.port=8089", "-Dcom.sun.management.jmxremote.ssl=false", "-Dcom.sun.management.jmxremote.authenticate=false", "-jar", "fhir-ingestion-1.0.5.jar" ]

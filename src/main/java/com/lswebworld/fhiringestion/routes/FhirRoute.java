@@ -14,12 +14,7 @@ public class FhirRoute extends RouteBuilder {
 
   @Override
   public void configure() throws Exception {
-    
-    onException(Exception.class)
-      .maximumRedeliveries(5)
-      .maximumRedeliveryDelay(10000L)      
-      .end();
-    
+            
     from("file://" + settings.getSourcePath()
         + "?delete=false"
         + "&preMove=staging"
@@ -34,11 +29,15 @@ public class FhirRoute extends RouteBuilder {
             .to("bean:RuleProcessor")
         .end()          
         .marshal().fhirJson(settings.getFhirVersion())
+        .log("Sending Bundle to FHIR Server..")
         .to("fhir://transaction/withBundle?inBody=stringBundle" 
             + "&serverUrl=" + settings.getFhirServer()
             + "&fhirVersion=" + settings.getFhirVersion()
             + "&validationMode=NEVER"
-            + "&log=true")
+            + "&log=" + settings.isFhirLogging()
+            + "&socketTimeout=" + settings.getTimeout()
+            + "&synchronous=true")
+        .log("Bundle Sent to FHIR Server.")
         .end();
           
 

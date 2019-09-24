@@ -11,7 +11,7 @@
   </parent>
   <groupId>com.lswebworld</groupId>
   <artifactId>fhir-ingestion</artifactId>
-  <version>1.0.0-RELEASE</version>
+  <version>1.0.5-RELEASE</version>
   <name>fhir-ingestion</name>
   <description>Simple Fhir Ingestion Engine to a FHIR Server from a File Repo.</description>
 

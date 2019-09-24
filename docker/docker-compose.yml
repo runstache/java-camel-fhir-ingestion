@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: db
+    image: mysql:5.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=hapi
+      - MYSQL_USER=hapiuser
+      - MYSQL_PASSWORD=hapipassword
+    ports:
+      - "3310:3306"
+  fhir-server:
+    image: runstache/hapi-fhir-server:v1
+    container_name: fhir-server
+    ports:
+      - "8086:8080"
+    links:
+      - db
+    environment:
+      - DATABASE_URL=jdbc:mysql://db/hapi
+      - DATABASE_USER=hapiuser
+      - DATABASE_PASSWORD=hapipassword
+      - POOL_SIZE=20
+  fhir-engine:
+    image: runstache/fhir-engine:latest
+    container_name: fhir-engine
+    ports:
+      - "8089:8089"
+    links:
+      - fhir-server
+    environment:
+      APP_FHIRVERSION: DSTU3
+      APP_SOURCEPATH: /opt/fhir
+      APP_FHIRSERVER: http://fhir-server:8080/hapi-fhir/baseDstu3
+      APP_ENABLED: 'true'
+      APP_IDENTIFIEREXIST: 'true'
+      LOG_LEVEL: INFO
+      ACTIVE_PROFILE: lcl
+      APP_TIMEOUT: 60000
+      APP_FHIRLOGGING: 'false'
+    volumes:
+      - c:/docker/data/fhir/ingestion/:/opt/fhir

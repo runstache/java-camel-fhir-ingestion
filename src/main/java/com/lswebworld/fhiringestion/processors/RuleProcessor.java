@@ -27,7 +27,10 @@ public class RuleProcessor implements Processor {
     
     IParser parser = ctx.newJsonParser();
     Bundle bundle = new Bundle();
-    bundle = parser.parseResource(Bundle.class, exchange.getIn().getBody().toString());
+    String jsonString = exchange.getIn().getBody().toString()
+        .replace("&nbsp;", "")
+        .replace("&copy;","");
+    bundle = parser.parseResource(Bundle.class, jsonString);
     
     for (BundleEntryComponent entry : bundle.getEntry()) {
       

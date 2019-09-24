@@ -12,6 +12,8 @@ public class AppSettings {
   private String sourcePath;
   private boolean enabled;
   private boolean identifierExist;
+  private int timeout;
+  private boolean fhirLogging;
   
 
   /**
@@ -63,6 +65,22 @@ public class AppSettings {
     this.identifierExist = identifierExist;
   }
 
+  public int getTimeout() {
+    return timeout;
+  }
+
+  public void setTimeout(int timeout) {
+    this.timeout = timeout;
+  }
+
+  public boolean isFhirLogging() {
+    return fhirLogging;
+  }
+
+  public void setFhirLogging(boolean fhirLogging) {
+    this.fhirLogging = fhirLogging;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof AppSettings) {
@@ -71,13 +89,10 @@ public class AppSettings {
           && this.fhirServer.equals(settings.getFhirServer())
           && this.fhirVersion.equals(settings.getFhirVersion())
           && this.sourcePath.equals(settings.getSourcePath())
-          && this.identifierExist == settings.isIdentifierExist();
+          && this.identifierExist == settings.isIdentifierExist()
+          && this.timeout == settings.getTimeout()
+          && this.fhirLogging == settings.isFhirLogging();
     }
     return false;
   }
-
-
-
-
-
 }
