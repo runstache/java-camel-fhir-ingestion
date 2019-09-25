@@ -40,5 +40,5 @@ services:
       ACTIVE_PROFILE: lcl
       APP_TIMEOUT: 60000
       APP_FHIRLOGGING: 'false'
-    volumes:
-      - c:/docker/data/fhir/ingestion/:/opt/fhir
+#    volumes:
+#      - c:/docker/data/fhir/ingestion/:/opt/fhir

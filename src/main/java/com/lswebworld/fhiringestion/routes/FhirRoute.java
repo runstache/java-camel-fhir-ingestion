@@ -27,17 +27,8 @@ public class FhirRoute extends RouteBuilder {
         .choice()
           .when(header("AddRules").isEqualToIgnoreCase("true"))
             .to("bean:RuleProcessor")
-        .end()          
-        .marshal().fhirJson(settings.getFhirVersion())
+        .end()
         .log("Sending Bundle to FHIR Server..")
-        .to("fhir://transaction/withBundle?inBody=stringBundle" 
-            + "&serverUrl=" + settings.getFhirServer()
-            + "&fhirVersion=" + settings.getFhirVersion()
-            + "&validationMode=NEVER"
-            + "&log=" + settings.isFhirLogging()
-            + "&socketTimeout=" + settings.getTimeout()
-            + "&synchronous=true")
-        .log("Bundle Sent to FHIR Server.")
         .end();
           
 
