@@ -29,6 +29,8 @@ public class FhirRoute extends RouteBuilder {
             .to("bean:RuleProcessor")
         .end()
         .log("Sending Bundle to FHIR Server..")
+        .to("bean:HttpProcessor")
+        .log("Bundle Sent to FHIR Server.")
         .end();
           
 
