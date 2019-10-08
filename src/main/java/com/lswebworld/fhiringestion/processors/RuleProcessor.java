@@ -29,7 +29,11 @@ public class RuleProcessor implements Processor {
     Bundle bundle = new Bundle();
     String jsonString = exchange.getIn().getBody().toString();
     bundle = parser.parseResource(Bundle.class, 
-        jsonString.replace("&nbsp;", " ").replace("&copy;", ""));
+        jsonString.replace("&nbsp;", " ")
+            .replace("&copy;", "")
+            .replace("&reg;", "")
+            .replace("&sect;", "")
+            .replace("&trade;", ""));
     
     for (BundleEntryComponent entry : bundle.getEntry()) {
       

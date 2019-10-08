@@ -11,6 +11,8 @@ services:
       - MYSQL_PASSWORD=hapipassword
     ports:
       - "3310:3306"
+    volumes:
+      - c:/docker/data/mysqldata/fhir:/var/lib/mysql
   fhir-server:
     image: runstache/hapi-fhir-server:v1
     container_name: fhir-server
